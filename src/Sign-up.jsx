@@ -1,7 +1,7 @@
 import "./index.css";
 
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { GoogleAuthProvider, signInWithPopup, signInWithRedirect } from "firebase/auth";
 import { useState } from "react";
 import { auth } from "./firebase.js"
@@ -36,8 +36,9 @@ export function SignUp() {
             const user = credentials.user;
 
             if (user) {
-                alert(`Dear ${name} Welcom to newsFlow`);
-                navigate("/");
+                setModaleShow("overLay")
+                setModaleAlert(`Dear ${name} Welcom to newsFlow`);
+                navigate("/", { replace: true });
             }
 
 
@@ -48,17 +49,23 @@ export function SignUp() {
             if (err.code === "auth/email-already-in-use") {
                 setModaleShow("overLay");
                 setModaleAlert("Accoutn Already Exist Login Now.");
+
             } else if (err.code === "auth/network-request-failed") {
                 setModaleShow("overLay");
                 setModaleAlert("Network Error⚠️");
             } else if (err.code === "auth/missing-password") {
                 setPasswordAlert("Please Input Password");
             } else if (err.code === "auth/weak-password") {
-                setPasswordAlert("Password too weak must contain atleas 7 characters");
+                setPasswordAlert("Password too weak must contain atleas 7 characters.");
+            } else if (err.code === "auth/invalid-email") {
+                setModaleAlert("Invalid Email");
+                setModaleShow("overLay");
             }
         }
 
     }
+
+
 
     const signUpWithGoogle = async () => {
         const provider = new GoogleAuthProvider();
@@ -67,7 +74,7 @@ export function SignUp() {
             const gooleSignIn = await signInWithPopup(auth, provider);
             const user = gooleSignIn.user;
             if (user) {
-                navigate("/")
+                navigate("/", { replace: true })
             }
         } catch (err) {
             console.log("googledSign", err);
@@ -179,7 +186,7 @@ export function SignUp() {
                         <input type="checkbox" id="terms" />
                         <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
                     </div>
-
+                    <div className="divider"><h3 className="terms-row"> <Link to="/">Login</Link></h3></div>
                     <button className="login-btn" onClick={() => {
                         handleSignUp();
                     }}
@@ -268,6 +275,8 @@ export function SignUp() {
                                     setPassword(e.target.value);
                                 }}
                             />
+
+                            <small className="strong">{passwordAlert}</small>
                         </div>
 
                         <div className="phone-field">
@@ -279,7 +288,7 @@ export function SignUp() {
                             <input type="checkbox" id="phone-terms" />
                             <label for="phone-terms">I agree to the <a href="#">Terms</a> & <a href="#">Privacy</a></label>
                         </div>
-
+                        <div className="divider terms-row"> <Link to="/"><span className="">Login</span></Link> </div>
                         <button className="phone-btn"
                             onClick={() => {
                                 handleSignUp();

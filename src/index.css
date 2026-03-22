@@ -658,6 +658,8 @@ body {
   .desktop-wrapper {
     display: flex;
   }
+
+
 }
 
 @media (max-width: 768px) {
@@ -668,5 +670,10 @@ body {
   .modal {
     border: 1.5px solid rgba(0, 0, 0, 0.582);
     width: 55%;
+  }
+
+  .strong {
+    font-size: 10px;
+    font-weight: 500;
   }
 }

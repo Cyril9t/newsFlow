@@ -1,0 +1,505 @@
+/* ----- CSS variables (light theme) ----- */
+:root {
+    --bg-body: #f8fafc;
+    --bg-card: #ffffff;
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    --accent: #3b82f6;
+    --accent-hover: #2563eb;
+    --border-light: #e2e8f0;
+    --shadow-sm: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --radius-md: 1rem;
+    --radius-sm: 0.75rem;
+    --transition: all 0.2s ease;
+}
+
+/* ----- reset & base ----- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-primary);
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+/* ----- header ----- */
+.site-header {
+    background-color: var(--bg-card);
+    border-bottom: 1px solid var(--border-light);
+    padding: 1.5rem 0;
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    backdrop-filter: blur(8px);
+    background-color: rgba(255, 255, 255, 0.85);
+}
+
+.header-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1rem;
+}
+
+.logOut {
+    padding: 6px;
+    color: red;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 600;
+    margin-top: 22px;
+    font-family: monospace;
+    border: 1px solid black;
+}
+
+/* ----- sidebar button (hamburger) ----- */
+.menu-btn {
+    background: none;
+    border: none;
+    font-size: 2.2rem;
+    line-height: 1;
+    cursor: default;
+    /* static – no click functionality */
+    color: var(--text-primary);
+    padding: 0 0.25rem;
+    transition: var(--transition);
+    order: -1;
+    /* keep it on the left */
+    margin-right: auto;
+}
+
+.menu-btn:hover {
+    color: var(--accent);
+    transform: scale(1.05);
+}
+
+a {
+    text-decoration: none;
+}
+
+.homeOverLay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background-color: #2564eb0c;
+    backdrop-filter: blur(1px);
+    width: 100%;
+    z-index: 1000;
+}
+
+.homeModal {
+    background-color: rgb(236, 236, 243);
+    height: 100%;
+    width: 26em;
+    border-radius: 0 14px 14px 0;
+    animation: widths 0.3s ease backwards;
+}
+
+@keyframes widths {
+    from {
+        width: 1em;
+        color: #1e293b00;
+    }
+
+    to {
+        width: 26em;
+        color: #161616;
+    }
+}
+
+.timesIcon {
+    padding: 35px;
+}
+
+.exitIcon {
+    border: none;
+    background: none;
+    font-size: 40px;
+    width: 20%;
+}
+
+.country {
+    margin-left: 11px;
+}
+
+.dropDown {
+    height: 39%;
+    justify-self: left;
+    margin: 30px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+}
+
+.cateButton {
+    font-size: 25px;
+    font-weight: 550;
+    border: none;
+    background: none;
+
+    /* animation: widths 0.7s ease backwards; */
+
+}
+
+.dropdownContent {
+    justify-self: right;
+    margin-left: 10px;
+    margin-top: 2px;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(64, 66, 68, 0.37);
+    overflow: scroll;
+    scrollbar-width: none;
+    padding: 2px;
+    border-radius: 4px;
+    border-bottom: 5px solid rgba(41, 39, 39, 0.556);
+
+    /* animation: height 1s ease backwards; */
+    transform: 1s;
+    transition: 1s;
+}
+
+@keyframes height {
+
+    from {
+        height: 10%;
+    }
+
+    to {
+        height: 100%;
+    }
+}
+
+
+.stack {
+    background-color: rgba(0, 0, 255, 0.566);
+    margin: 2px;
+    padding: 6px;
+    color: aliceblue;
+    border: none;
+    border-radius: 5px;
+    background: #ebe8e8b5;
+    border-radius: 4px;
+    /* padding: 3px; */
+    border-bottom: 1px solid black;
+    margin: 2px;
+    color: rgb(0, 0, 0);
+    font-weight: 550;
+    font-size: 14px;
+    text-align: left;
+
+}
+
+.stack:hover {
+    /* background-color: rgba(255, 255, 255, 0.676); */
+    color: #1e293b;
+    font-family: cursive;
+    border: 2px solid rgb(8, 8, 68);
+}
+
+/* ----- logo & tagline ----- */
+.logo {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #2563eb, #7c3aed);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1.2;
+    margin-right: auto;
+    /* pushes tagline to the right if space allows */
+}
+
+.tagline {
+    color: var(--text-muted);
+    font-weight: 400;
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+/* ----- news grid ----- */
+.news-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 2.5rem 0;
+}
+
+/* ----- card styles (unchanged) ----- */
+.news-card {
+    background-color: var(--bg-card);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border-light);
+    animation: fadeInUp 0.5s ease backwards;
+    will-change: transform;
+}
+
+.news-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+}
+
+.card-image {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    background-color: #e2e8f0;
+    border-bottom: 1px solid var(--border-light);
+}
+
+.card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+    color: var(--text-primary);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-description {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.25rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+}
+
+.card-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    border-top: 1px dashed var(--border-light);
+    padding-top: 0.75rem;
+}
+
+.source {
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    font-size: 0.75rem;
+}
+
+.date {
+    font-size: 0.75rem;
+}
+
+/* ----- footer ----- */
+.site-footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    background-color: var(--bg-card);
+    border-top: 1px solid var(--border-light);
+    padding: 1.5rem 0;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.loaders {
+    margin: 2em;
+    background-color: var(--bg-card);
+    width: 6em;
+    border-radius: 15px;
+    padding: 10px;
+
+
+}
+
+/* ----- animations ----- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.news-card:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.news-card:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.news-card:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.news-card:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.news-card:nth-child(5) {
+    animation-delay: 0.25s;
+}
+
+.news-card:nth-child(6) {
+    animation-delay: 0.3s;
+}
+
+.news-card:nth-child(7) {
+    animation-delay: 0.35s;
+}
+
+.news-card:nth-child(8) {
+    animation-delay: 0.4s;
+}
+
+/* ----- tablet (min-width: 640px) ----- */
+@media (min-width: 768px) {
+    .news-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .menu-btn {
+        margin-right: 0;
+        order: 0;
+        /* reset order, keep natural flow */
+    }
+
+    .logo {
+        margin-right: 0;
+    }
+
+
+
+}
+
+@media (max-width: 768px) {
+
+
+    .homeModal {
+        width: 60%;
+        animation: widthS 1s ease backwards;
+    }
+
+    .dropDown {
+        margin: 7px;
+        height: 51%;
+        width: 70%;
+    }
+
+    .dropdownContent {
+        margin-top: 0;
+        margin-left: 14px;
+        padding: 2px;
+        background-color: #807d7d81;
+
+    }
+
+    .stack {
+        background: #ebe8e8f3;
+        border-radius: 4px;
+        padding: 5.5px;
+        border-bottom: 1px solid black;
+        margin: 2px;
+        color: rgb(0, 0, 0);
+        font-weight: 550;
+        font-size: 14px;
+        text-align: left;
+
+    }
+
+    .stack:hover {
+        border: 2px solid rgb(13, 13, 100);
+        color: rgb(10, 10, 10);
+    }
+
+    .cateButton {
+        font-size: 20px;
+        margin: 5px;
+        color: #04256c;
+
+    }
+
+    @keyframes widthS {
+        from {
+            width: 10%;
+
+        }
+
+        to {
+            width: 60%;
+
+        }
+    }
+}
+
+/* ----- desktop (min-width: 1024px) ----- */
+@media (min-width: 1024px) {
+    .news-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .logo {
+        font-size: 2.5rem;
+    }
+}
+
+/* ----- large desktop (optional) ----- */
+@media (min-width: 1280px) {
+    .news-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+/* ----- touch-friendly tweaks ----- */
+.news-card {
+    -webkit-tap-highlight-color: transparent;
+    cursor: default;
+}
+
+.menu-btn {
+    -webkit-tap-highlight-color: transparent;
+}

@@ -1,5 +1,5 @@
 import "./App.css";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "./firebase.js";
 import { useState } from "react";
@@ -25,15 +25,15 @@ export function LoginPage() {
         } catch (err) {
             console.log("Login Error Say", err)
             if (err.code === "auth/invalid-email") {
-                alert("invalid-email");
-
+                setModaleAlert("invalid-email");
+                setModaleShow("overLay")
             } else if (err.code === "auth/network-request-failed") {
                 setModaleShow("overLay");
                 setModaleAlert("Network Error ⚠️");
             } else if (err.code === "auth/missing-password") {
                 setPasswordAlert("Please Input Passowrd");
             } else if (err.code === "auth/invalid-credential") {
-                setModaleAlert("Account doesn`t exist make sure your credentials are Correct")
+                setModaleAlert("Account does not exist make sure your credentials are Correct.")
                 setModaleShow("overLay")
             }
         }
@@ -43,7 +43,7 @@ export function LoginPage() {
         const provider = new GoogleAuthProvider();
         try {
             const google = await signInWithPopup(auth, provider);
-            console.log("google", google);
+
             if (google.user) {
                 navigate('home');
             }
@@ -56,6 +56,23 @@ export function LoginPage() {
         }
 
     }
+
+    const reset = async (email) => {
+        try {
+            await sendPasswordResetEmail(auth, email);
+            alert("Password sent");
+        } catch (err) {
+            console.log(err);
+            if (err.code === "auth/user-not-found") {
+                setModaleAlert("No user with this email");
+                setModaleShow("overLay");
+            } else if (err.code === "auth/missing-email") {
+                setModaleShow("overLay");
+                setModaleAlert("Please provide your email to reset password");
+            }
+        }
+    }
+
 
 
     return (<>
@@ -133,7 +150,9 @@ export function LoginPage() {
                             }}
                         />
                         <small className="strong">{passwordAlert}</small>
-                        <a href="#" className="forgot desktop-forgot">Forgot Password?</a>
+                        <a href="#" className="forgot desktop-forgot" onClick={() => {
+                            reset(email);
+                        }}>Forgot Password?</a>
                     </div>
 
                     <button className="login-btn" onClick={() => {
@@ -207,6 +226,7 @@ export function LoginPage() {
                                     setPassword(e.target.value);
                                 }}
                             />
+                            <small className="strong">{passwordAlert}</small>
                             <a href="#" className="forgot phone-forgot">Forgot Password?</a>
 
                         </div>

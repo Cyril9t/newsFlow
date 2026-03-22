@@ -46,6 +46,8 @@ export function HomePage() {
       .then((data) => {
         setGlobal(data.articles);
       })
+
+    console.log(data.articles);
   }, []);
 
   const handleCats = async (cati) => {

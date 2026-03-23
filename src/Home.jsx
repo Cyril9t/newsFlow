@@ -1,9 +1,11 @@
-import { data, Link } from "react-router-dom";
+import { data, Link, useNavigate } from "react-router-dom";
 import "./Home.css";
 import { useEffect, useState } from "react";
 import { PuffLoader } from "react-spinners";
+import { auth } from "./firebase.js";
+import { signOut } from "firebase/auth";
 
-export function HomePage() {
+export function HomePage({ name }) {
 
   const [global, setGlobal] = useState([]);
   const [openCountry, setOpenCountry] = useState(false);
@@ -17,7 +19,19 @@ export function HomePage() {
   const [displayOptions, setDisplayOptions] = useState(null);
   const [countryLoading, setCountryLoading] = useState(null);
   const [catIloading, setCatIloading] = useState(null);
+  const [modaleShow, setModaleShow] = useState("overLay");
+  const navigate = useNavigate();
 
+  const logout = () => {
+    signOut(auth)
+      .then(() => {
+        console.log("log Out successfully");
+        navigate("/")
+
+      }).then((err) => {
+        console.log("logout error", err)
+      })
+  };
   useEffect(() => {
     if (global.length <= 0) {
       setLoading(true);
@@ -270,13 +284,34 @@ export function HomePage() {
                 >Health</button>
               </div>)}
 
-            <button className="logOut">Log Out</button>
+            <button className="logOut" onClick={() => {
+              logout();
+            }}>Log Out</button>
           </div>
         </div>
       </div>
 
+      {/* <div className={modaleShow}>
+        <div className="modal">
+          <section className="remove ">
+            <button className="exit" onClick={() => {
+              setModaleShow("hide");
+            }}>&times;</button>
+          </section>
+
+          <div className="content">
+            Hey... {name} 👋 Welcome To newsFlow
+          </div>
+        </div>
+      </div> */}
+
+
+
+
 
       <main class="container">
+        {name ? <h2> Hey... {name} 👋 Welcome To newsFlow</h2> : ""}
+
 
         {!display ? <>{loading ? <div className="loaders" > <PuffLoader size={80} color="blue" /> </div> :
           <div class="news-grid">

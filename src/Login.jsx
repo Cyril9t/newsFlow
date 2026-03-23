@@ -4,20 +4,24 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { auth } from "./firebase.js";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 export function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [modaleShow, setModaleShow] = useState("hide");
     const [modaleAlert, setModaleAlert] = useState("");
     const [passwordAlert, setPasswordAlert] = useState("");
+    const [buttonLoader, setButtonLoader] = useState(false);
 
 
     const navigate = useNavigate("");
 
     const handleSignIn = async () => {
+        setButtonLoader(true);
         try {
             const loginCredentials = await signInWithEmailAndPassword(auth, email, password);
             console.log(loginCredentials.user)
+
 
             if (loginCredentials.user) {
                 navigate("home")
@@ -33,9 +37,11 @@ export function LoginPage() {
             } else if (err.code === "auth/missing-password") {
                 setPasswordAlert("Please Input Passowrd");
             } else if (err.code === "auth/invalid-credential") {
-                setModaleAlert("Account does not exist make sure your credentials are Correct.")
+                setModaleAlert("Invalide email or password")
                 setModaleShow("overLay")
             }
+        } finally {
+            setButtonLoader(false);
         }
     }
 
@@ -157,7 +163,7 @@ export function LoginPage() {
 
                     <button className="login-btn" onClick={() => {
                         handleSignIn();
-                    }}>Login</button>
+                    }}>{buttonLoader ? <ClipLoader size={13} color="white" /> : "Login"}</button>
 
                     <div className="divider"><span>or continue with</span></div>
 
@@ -233,7 +239,7 @@ export function LoginPage() {
 
                         <button className="phone-btn" onClick={() => {
                             handleSignIn();
-                        }}>Login</button>
+                        }}>{buttonLoader ? <ClipLoader size={13} color="white" /> : "Login"}</button>
 
                         <p className="phone-signup">Don't have any account? <Link to="register">Sign Up</Link></p>
 

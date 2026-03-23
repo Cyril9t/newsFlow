@@ -6,18 +6,18 @@ import { GoogleAuthProvider, signInWithPopup, signInWithRedirect } from "firebas
 import { useState } from "react";
 import { auth } from "./firebase.js"
 import { useNavigate, Link } from "react-router-dom";
-export function SignUp() {
+import { ClipLoader } from "react-spinners";
+export function SignUp({ setName }) {
 
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [name, setName] = useState("");
     const [confirmPass, setConfirmPass] = useState("");
     const [debounced, setDebounced] = useState("");
     const [modaleShow, setModaleShow] = useState("hide");
     const [modaleAlert, setModaleAlert] = useState("");
     const [passwordAlert, setPasswordAlert] = useState("");
-
+    const [buttonLoader, setButtonLoader] = useState(false);
     const navigate = useNavigate("");
 
     const debounce = () => {
@@ -29,6 +29,8 @@ export function SignUp() {
     }
 
     const handleSignUp = async () => {
+
+        setButtonLoader(true);
 
         try {
 
@@ -61,6 +63,8 @@ export function SignUp() {
                 setModaleAlert("Invalid Email");
                 setModaleShow("overLay");
             }
+        } finally {
+            setButtonLoader(false);
         }
 
     }
@@ -190,7 +194,7 @@ export function SignUp() {
                     <button className="login-btn" onClick={() => {
                         handleSignUp();
                     }}
-                    >Create Account</button>
+                    >{buttonLoader ? <ClipLoader size={13} color="white" /> : "Create Account"}</button>
 
                     <div className="divider"><span>or sign up with</span></div>
 
@@ -293,7 +297,7 @@ export function SignUp() {
                             onClick={() => {
                                 handleSignUp();
                             }}
-                        >Create Account</button>
+                        >{buttonLoader ? <ClipLoader size={13} color="white" /> : "Create Account"}</button>
 
                     </div>
 

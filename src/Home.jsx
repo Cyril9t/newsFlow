@@ -284,9 +284,9 @@ export function HomePage({ name }) {
                 >Health</button>
               </div>)}
 
-            <button className="logOut" onClick={() => {
+            <button className="logOut " onClick={() => {
               logout();
-            }}>Log Out</button>
+            }}> <i class="fas fa-right-from-bracket"> LogOut </i></button>
           </div>
         </div>
       </div>

@@ -92,7 +92,7 @@ export function HomePage({ name }) {
             <button class="menu-btn" aria-label="Menu" onClick={() => {
               setHIde("homeOverLay")
             }}>☰</button>
-            <h1 class="logo">📰 newsFlow</h1>
+            <h1 class="logo">✦ newsFlow</h1>
 
           </div>
         </div>
@@ -284,11 +284,32 @@ export function HomePage({ name }) {
                 >Health</button>
               </div>)}
 
-            <button className="logOut " onClick={() => {
-              logout();
-            }}> <i class="fas fa-right-from-bracket"> LogOut </i></button>
+
+          </div>
+          <div className="profileIcons">
+            <div className="">
+              <Link to="/profile">
+                {/* <h3 className="section-title">Profile Picture</h3> */}
+                <div className="avatar-upload-row">
+                  <div className="avatar avatar-sm">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.4">
+                      <circle cx="12" cy="8" r="4" /><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+                    </svg>
+                  </div>
+                  <div className="upload-actions">
+                    <h3 className="section-title sideProfile">Profile</h3>
+                  </div>
+
+                </div>
+              </Link>
+            </div>
+
+
+
           </div>
         </div>
+
+
       </div>
 
       {/* <div className={modaleShow}>

@@ -106,7 +106,7 @@ export function LoginPage() {
                 <div className="left-content">
                     <div className="brand">
                         <div className="brand-icon">✦</div>
-                        <span className="brand-name">Dream</span>
+                        <span className="brand-name">newsFlow</span>
                     </div>
                     <div className="hero-text">
                         <h1>Welcome<br />back.</h1>

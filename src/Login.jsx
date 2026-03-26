@@ -12,7 +12,7 @@ export function LoginPage() {
     const [modaleAlert, setModaleAlert] = useState("");
     const [passwordAlert, setPasswordAlert] = useState("");
     const [buttonLoader, setButtonLoader] = useState(false);
-
+    const [showPassword, setShowPassword] = useState(false);
 
     const navigate = useNavigate("");
 
@@ -80,9 +80,6 @@ export function LoginPage() {
             }
         }
     }
-
-
-
     return (<>
 
 
@@ -155,13 +152,18 @@ export function LoginPage() {
 
                     <div className="input-group">
                         <label>Password</label>
-                        <input type="password" placeholder="············"
+                        <input type={showPassword ? "text " : "password"} placeholder="············"
                             onChange={(e) => {
                                 setPasswords(e.target.value)
                             }}
 
                             required
                         />
+
+                        <button className="showPassword" onClick={() => {
+                            setShowPassword(prev => !prev);
+                        }}> <i class="fas fa-eye"></i> Show password</button>
+
                         <small className="strong">{passwordAlert}</small>
                         <a href="#" className="forgot desktop-forgot" onClick={() => {
                             reset(email);
@@ -233,12 +235,17 @@ export function LoginPage() {
 
                         <div className="phone-field">
                             <label>Password</label>
-                            <input type="password"
-                                placeholder="············"
+
+                            <input type={showPassword ? "text " : "password"} placeholder="············"
+
                                 onChange={(e) => {
-                                    setPassword(e.target.value);
+                                    setPasswords(e.target.value);
                                 }}
                             />
+                            <button className="showPassword" onClick={() => {
+                                setShowPassword(prev => !prev);
+                            }}> <i class="fas fa-eye"></i> Show password</button>
+
                             <small className="strong">{passwordAlert}</small>
                             <a href="#" className="forgot phone-forgot">Forgot Password?</a>
 

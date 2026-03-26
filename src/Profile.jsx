@@ -51,12 +51,13 @@ export function ProfilePage() {
                                     <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
                                 </svg> */}
                                 <img src="profile.jpg" className="photo" alt="name" />
+
                             </div>
                             <span className="online-badge"></span>
                         </div>
                         <div className="header-info">
-                            <h1 className="profile-fullname">Alexandra Monroe</h1>
-                            <span className="profile-username">@alexmonroe</span>
+                            <h1 className="profile-fullname">newsFlow</h1>
+                            <span className="profile-username">@newsFlowo</span>
                             <span className="profile-role"></span>
                         </div>
                         <div>
@@ -74,7 +75,10 @@ export function ProfilePage() {
 
                             <section className="section">
                                 <h3 className="section-title">About</h3>
-                                <p className="bio-text">Passionate designer crafting meaningful digital experiences. I blend aesthetics with function — turning complex problems into elegant, intuitive interfaces. Currently open to freelance collaborations and full-time opportunities.</p>
+                                <p className="bio-text">NewsFlow is a modern news platform built to deliver real-time updates from around the world fast, simple, and reliable. Designed with user experience in mind, it gives you instant access to trending headlines across categories like technology, business, sports, and entertainment.
+                                    With NewsFlow, users can explore news based on their preferred country, making it easy to stay connected both locally and globally. The platform offers a smooth, responsive interface that ensures seamless browsing on any device.
+                                    Powered by live data, NewsFlow keeps content fresh and up to date, while its scalable architecture allows for future enhancements like personalized feeds, saved articles, and notifications.
+                                    NewsFlow isn’t just a news app—it’s a smarter way to experience the world’s stories.</p>
                             </section>
 
                             <section className="section">
@@ -89,12 +93,12 @@ export function ProfilePage() {
                                     <li>
                                         <span className="d-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2z" /><path d="M22 6l-10 7L2 6" /></svg></span>
                                         <span className="d-label">Email</span>
-                                        <span className="d-value">alex@dream.com</span>
+                                        <span className="d-value">newsFlow@update.com</span>
                                     </li>
                                     <li>
                                         <span className="d-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2z" /><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20" /></svg></span>
                                         <span className="d-label">Website</span>
-                                        <a href="#" className="d-value d-link">alexmonroe.design</a>
+                                        <a href="#" className="d-value d-link">newsFlow.com</a>
                                     </li>
                                     <li>
                                         <span className="d-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" /></svg></span>
@@ -106,11 +110,11 @@ export function ProfilePage() {
                                         <span className="d-label">Language</span>
                                         <span className="d-value">English (US)</span>
                                     </li>
-                                    <li>
+                                    {/* <li>
                                         <span className="d-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" /><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2" /></svg></span>
                                         <span className="d-label">Work</span>
                                         <span className="d-value">Freelance · Open to Full-time</span>
-                                    </li>
+                                    </li> */}
                                 </ul>
                             </section>
 

@@ -2,8 +2,7 @@ import { data, Link, useNavigate } from "react-router-dom";
 import "./Home.css";
 import { useEffect, useState } from "react";
 import { PuffLoader } from "react-spinners";
-import { auth } from "./firebase.js";
-import { signOut } from "firebase/auth";
+
 
 export function HomePage({ name }) {
 
@@ -22,16 +21,7 @@ export function HomePage({ name }) {
   const [modaleShow, setModaleShow] = useState("overLay");
   const navigate = useNavigate();
 
-  const logout = () => {
-    signOut(auth)
-      .then(() => {
-        console.log("log Out successfully");
-        navigate("/")
 
-      }).then((err) => {
-        console.log("logout error", err)
-      })
-  };
   useEffect(() => {
     if (global.length <= 0) {
       setLoading(true);
@@ -55,13 +45,14 @@ export function HomePage({ name }) {
   const api_key = "2a3a640ee7544f8739f8051956bb0a11";
 
   useEffect(() => {
+
     fetch(`https://gnews.io/api/v4/top-headlines?lang=en&token=${api_key}`)
       .then((resp) => resp.json())
       .then((data) => {
+        console.log(data);
         setGlobal(data.articles);
-      })
+      });
 
-    console.log(data.articles);
   }, []);
 
   const handleCats = async (cati) => {

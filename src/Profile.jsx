@@ -1,6 +1,24 @@
 import "./Profile.css"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom";
+import { signOut } from "firebase/auth";
+import { auth } from "./firebase.js";
 export function ProfilePage() {
+
+
+    const navigate = useNavigate();
+
+
+    const logout = () => {
+        signOut(auth)
+            .then(() => {
+                console.log("log Out successfully");
+                navigate("/")
+
+            }).then((err) => {
+                console.log("logout error", err)
+            })
+    };
+
 
     return (
         <>
@@ -161,7 +179,7 @@ export function ProfilePage() {
                     <div className="two-col">
                         <div className="col-left">
 
-                            <section className="section">
+                            {/* <section className="section">
                                 <h3 className="section-title">Edit Profile</h3>
                                 <div className="settings-form">
                                     <div className="field-row">
@@ -204,8 +222,8 @@ export function ProfilePage() {
                                     </div>
                                     <button className="save-btn">Save Changes</button>
                                 </div>
-                            </section>
-
+                            </section> */}
+                            {/* 
                             <section className="section">
                                 <h3 className="section-title">Profile Picture</h3>
                                 <div className="avatar-upload-row">
@@ -219,12 +237,12 @@ export function ProfilePage() {
                                         <button className="btn-ghost-sm">Remove</button>
                                     </div>
                                 </div>
-                            </section>
+                            </section> */}
 
                         </div>
                         <div className="col-right">
 
-                            <section className="section">
+                            {/* <section className="section">
                                 <h3 className="section-title">Appearance</h3>
                                 <div className="theme-options">
                                     <label className="theme-option">
@@ -238,11 +256,13 @@ export function ProfilePage() {
                                         <span>Dark</span>
                                     </label>
                                 </div>
-                            </section>
+                        </section> */}
                             <section className="section">
                                 <h3 className="section-title">Account</h3>
                                 <div className="account-actions">
-                                    <button className="account-btn">
+                                    <button className="account-btn" onClick={() => {
+                                        logout();
+                                    }}>
                                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9" /></svg>
                                         Log Out
                                     </button>
@@ -255,9 +275,9 @@ export function ProfilePage() {
 
                         </div>
                     </div>
-                </div>
+                </div >
 
-            </div>
+            </div >
 
             <footer className="footer">
                 <span>✦ newsFlow &copy; 2026</span>

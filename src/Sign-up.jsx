@@ -28,6 +28,7 @@ export function SignUp({ setName }) {
         return () => clearInterval(timer);
     }
 
+
     const handleSignUp = async () => {
 
         setButtonLoader(true);
@@ -41,6 +42,8 @@ export function SignUp({ setName }) {
                 setModaleShow("overLay")
                 setModaleAlert(`Dear ${name} Welcom to newsFlow`);
                 navigate("/", { replace: true });
+                console.log(user);
+
             }
 
 

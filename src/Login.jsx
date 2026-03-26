@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ClipLoader } from "react-spinners";
 export function LoginPage() {
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [passwords, setPasswords] = useState("");
     const [modaleShow, setModaleShow] = useState("hide");
     const [modaleAlert, setModaleAlert] = useState("");
     const [passwordAlert, setPasswordAlert] = useState("");
@@ -16,15 +16,16 @@ export function LoginPage() {
 
     const navigate = useNavigate("");
 
-    const handleSignIn = async () => {
+    const handleSignIn = async (e) => {
+        e.preventDefault();
+        console.log(e)
         setButtonLoader(true);
         try {
-            const loginCredentials = await signInWithEmailAndPassword(auth, email, password);
-            console.log(loginCredentials.user)
-
-
-            if (loginCredentials.user) {
-                navigate("home")
+            const loginCredentials = await signInWithEmailAndPassword(auth, email, passwords);
+            const user = loginCredentials.user
+            console.log(loginCredentials)
+            if (user) {
+                navigate("/home")
             }
         } catch (err) {
             console.log("Login Error Say", err)
@@ -53,6 +54,7 @@ export function LoginPage() {
             if (google.user) {
                 navigate('home');
             }
+
         } catch (err) {
             console.log("Google Error Say", err);
             if (err.code === "auth/internal-error") {
@@ -133,7 +135,7 @@ export function LoginPage() {
 
 
             <div className="right-panel">
-                <div className="desktop-form-container">
+                <form onSubmit={handleSignIn} className="desktop-form-container">
                     <div className="form-header">
                         <h2>Sign in</h2>
                         <p>Access your Dream account</p>
@@ -142,18 +144,23 @@ export function LoginPage() {
                     <div className="input-group">
                         <label>E-mail</label>
                         <input type="email" placeholder="Hello@dream.com"
-                            onClick={(e) => {
+                            onChange={(e) => {
                                 setEmail(e.target.value);
+
                             }}
+                            required
+
                         />
                     </div>
 
                     <div className="input-group">
                         <label>Password</label>
                         <input type="password" placeholder="············"
-                            onClick={(e) => {
-                                setPassword(e.target.value)
+                            onChange={(e) => {
+                                setPasswords(e.target.value)
                             }}
+
+                            required
                         />
                         <small className="strong">{passwordAlert}</small>
                         <a href="#" className="forgot desktop-forgot" onClick={() => {
@@ -161,9 +168,7 @@ export function LoginPage() {
                         }}>Forgot Password?</a>
                     </div>
 
-                    <button className="login-btn" onClick={() => {
-                        handleSignIn();
-                    }}>{buttonLoader ? <ClipLoader size={13} color="white" /> : "Login"}</button>
+                    <button className="login-btn">{buttonLoader ? <ClipLoader size={13} color="white" /> : "Login"}</button>
 
                     <div className="divider"><span>or continue with</span></div>
 
@@ -188,7 +193,7 @@ export function LoginPage() {
                     </div>
 
                     <p className="signup-text">Don't have an account? <Link to="Register">Sign Up</Link></p>
-                </div>
+                </form>
             </div>
 
         </div>
@@ -221,6 +226,8 @@ export function LoginPage() {
                                     setEmail(e.target.value);
 
                                 }}
+
+                                required={true}
                             />
                         </div>
 

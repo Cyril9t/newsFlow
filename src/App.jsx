@@ -9,20 +9,14 @@ import { ProfilePage } from "./Profile";
 function App() {
 
   const [name, setName] = useState("");
+  localStorage.clear();
 
   return (
-
-
     <Routes>
-
       <Route path="/" element={<LoginPage />} />
       <Route path="Register" element={<SignUp setName={setName} />} />
       <Route path="home" element={<HomePage name={name} />} />
       <Route path="profile" element={<ProfilePage />} />
-
-
-
-
     </Routes>
 
 

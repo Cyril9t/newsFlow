@@ -91,6 +91,27 @@ body {
     transform: scale(1.05);
 }
 
+.files {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #1a1a1a;
+    border: 4px solid var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transition: border-color var(--transition);
+}
+
+.pro {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    box-shadow: none;
+}
+
 a {
     text-decoration: none;
 }
@@ -118,12 +139,12 @@ a {
 }
 
 .profileIcons {
-    margin: 2em;
+    margin: 1em;
 }
 
 .sideProfile {
     place-content: center;
-    margin-top: 30px;
+    margin-top: 10px;
 
 }
 
@@ -141,6 +162,11 @@ a {
 
 .timesIcon {
     padding: 35px;
+}
+
+.titles {
+    margin-top: 5px;
+    margin-bottom: -20px;
 }
 
 .exitIcon {
@@ -256,15 +282,17 @@ a {
 }
 
 /* ----- news grid ----- */
-.news-grid {
+.news-grids {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.5rem;
-    margin: 2.5rem 0;
+    gap: 2rem;
+    height: 25em;
+    overflow: scroll;
+    margin: 2rem 0;
 }
 
 /* ----- card styles (unchanged) ----- */
-.news-card {
+.news-cards {
     background-color: var(--bg-card);
     border-radius: var(--radius-md);
     overflow: hidden;
@@ -275,6 +303,7 @@ a {
     border: 1px solid var(--border-light);
     animation: fadeInUp 0.5s ease backwards;
     will-change: transform;
+
 }
 
 .news-card:hover {

@@ -42,32 +42,32 @@ export function HomePage({ name }) {
 
   }, [global, cat, countries]);
 
-  const api_key = "2a3a640ee7544f8739f8051956bb0a11";
+  const api_key = import.meta.env.VITE_API_KEY;
 
   useEffect(() => {
 
-    fetch(`https://gnews.io/api/v4/top-headlines?lang=en&token=${api_key}`)
+    fetch(`https://newsdata.io/api/1/latest?apikey=${api_key}&language=en`)
       .then((resp) => resp.json())
       .then((data) => {
         console.log(data);
-        setGlobal(data.articles);
+        setGlobal(data.results);
       });
 
   }, []);
 
   const handleCats = async (cati) => {
-    fetch(`https://gnews.io/api/v4/top-headlines?category=${cati}&lang=en&token=${api_key}`)
+    fetch(`https://newsdata.io/api/1/latest?apikey=${api_key}&category=${cati}`)
       .then((resp) => resp.json())
       .then((data) => {
-        setCat(data.articles);
+        setCat(data.results);
 
       })
   }
   const handleCountry = async (country) => {
-    fetch(`https://gnews.io/api/v4/top-headlines?country=${country}&token=${api_key}`)
+    fetch(`https://newsdata.io/api/1/latest?apikey=${api_key}&country=${country}`)
       .then((resp) => resp.json())
       .then((data) => {
-        setCountries(data.articles);
+        setCountries(data.results);
 
       })
   }
@@ -196,27 +196,27 @@ export function HomePage({ name }) {
               <div className="dropdownContent">
                 <button className="stack"
                   onClick={() => {
-                    handleCats("general");
-                    setTitle("General");
+                    handleCats("top");
+                    setTitle("business");
                     setHIde("hide");
                     setDisplay(true);
                     setDisplayOptions(false);
                   }}
-                >General</button>
+                >Top</button>
                 <button className="stack"
                   onClick={() => {
-                    handleCats("world");
-                    setTitle("World")
+                    handleCats("environment");
+                    setTitle("environment")
                     setHIde("hide");
                     setDisplay(true);
                     setDisplayOptions(false);
                   }}
-                >World</button>
+                >Environment</button>
                 <button className="stack" onClick={() => {
-                  handleCats("nations");
-                  setTitle("Nations")
+                  handleCats("politics");
+                  setTitle("politics")
                   setHIde("hide")
-                }}>Nation</button>
+                }}>Politics</button>
                 <button className="stack"
                   onClick={() => {
                     ;
@@ -273,6 +273,19 @@ export function HomePage({ name }) {
                     setDisplayOptions(false);
                   }}
                 >Health</button>
+
+
+                <button className="stack"
+                  onClick={() => {
+                    handleCats("food");
+                    setTitle("Food");
+                    setHIde("hide");
+                    setDisplay(true);
+                    setDisplayOptions(false);
+                  }}
+                >Food</button>
+
+
               </div>)}
 
 
@@ -282,7 +295,7 @@ export function HomePage({ name }) {
               <Link to="/profile">
                 {/* <h3 className="section-title">Profile Picture</h3> */}
                 <div className="avatar-upload-row">
-                  <div className="avatar avatar-sm">
+                  <div className="pro files">
                     <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.4">
                       <circle cx="12" cy="8" r="4" /><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
                     </svg>
@@ -326,20 +339,26 @@ export function HomePage({ name }) {
 
 
         {!display ? <>{loading ? <div className="loaders" > <PuffLoader size={80} color="blue" /> </div> :
-          <div class="news-grid">
+          <div class="news-grids">
             {global?.map((news) => {
               return (
-                <Link to={news.url} key={news.id}>
-                  <article class="news-card" >
+                <Link to={news.link} key={news.article_id}>
+                  <article class="news-cards" >
 
-                    <img class="card-image" src={news.image} alt={news.title} loading="lazy" />
+                    <img class="card-image" src={news.image_url} alt={news.title} loading="lazy" />
                     <div class="card-content">
                       <h2 class="card-title">{news.title}</h2>
                       <p class="card-description">{news.description}</p>
                       <div class="card-meta">
-                        <span class="source">{news.source?.name}</span>
-                        <time class="date" datetime="2026-03-20">Published On: {news.publishedAt}</time>
+                        <span class="source">{news.source_name}</span>
+                        <span class="date" datetime="2026-03-20">Pub On: {news.pubDate}</span>
+
+
                       </div>
+                      <br />
+                      <div className="date">Language: <span class="source">{news.language}</span></div>
+
+
                     </div>
                   </article>
                 </Link>
@@ -351,22 +370,28 @@ export function HomePage({ name }) {
 
           {!displayOptions ? <>
 
-            <h1>{title}</h1>
+            <h2 className="titles">{title}</h2>
             {catIloading ? <div className="loaders" > <PuffLoader size={80} color="blue" /> </div> :
-              <div class="news-grid">
+              <div class="news-grids">
                 {cat?.map((news) => {
                   return (
-                    <Link to={news.url} key={news.id}>
-                      <article class="news-card" >
+                    <Link to={news.link} key={news.article_id}>
+                      <article class="news-cards" >
 
-                        <img class="card-image" src={news.image} alt={news.title} loading="lazy" />
+                        <img class="card-image" src={news.image_url} alt={news.title} loading="lazy" />
                         <div class="card-content">
                           <h2 class="card-title">{news.title}</h2>
                           <p class="card-description">{news.description}</p>
                           <div class="card-meta">
-                            <span class="source">{news.source?.name}</span>
-                            <time class="date" datetime="2026-03-20">Published On: {news.publishedAt}</time>
+                            <span class="source">{news.source_name}</span>
+                            <span class="date" datetime="2026-03-20">Pub On: {news.pubDate}</span>
+
+
                           </div>
+                          <br />
+                          <div className="date">Language: <span class="source">{news.language}</span></div>
+
+
                         </div>
                       </article>
                     </Link>
@@ -379,27 +404,32 @@ export function HomePage({ name }) {
             :
             <>
 
-              <h1>{title}</h1>
+              <h2 className="titles">{title}</h2>
 
               {countryLoading ? <div className="loaders" > <PuffLoader size={80} color="blue" /> </div> :
-                <div class="news-grid">
+                <div class="news-grids">
                   {countries?.map((news) => {
                     return (
-                      <Link to={news.url} key={news.id}>
-                        <article class="news-card" >
+                      <Link to={news.link} key={news.article_id}>
+                        <article class="news-cards" >
 
-                          <img class="card-image" src={news.image} alt={news.title} loading="lazy" />
+                          <img class="card-image" src={news.image_url} alt={news.title} loading="lazy" />
                           <div class="card-content">
                             <h2 class="card-title">{news.title}</h2>
                             <p class="card-description">{news.description}</p>
                             <div class="card-meta">
-                              <span class="source">{news.source?.name}</span>
-                              <time class="date" datetime="2026-03-20">Published On: {news.publishedAt}</time>
+                              <span class="source">{news.source_name}</span>
+                              <span class="date" datetime="2026-03-20">Pub On: {news.pubDate}</span>
+
+
                             </div>
+                            <br />
+                            <div className="date">Language: <span class="source">{news.language}</span></div>
+
+
                           </div>
                         </article>
                       </Link>
-
                     )
                   })}
                 </div>} </>} </>}

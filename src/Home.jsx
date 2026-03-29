@@ -76,18 +76,6 @@ export function HomePage({ name }) {
   return (
     <>
 
-      <header class="site-header">
-        <div class="container">
-          <div class="header-content">
-
-            <button class="menu-btn" aria-label="Menu" onClick={() => {
-              setHIde("homeOverLay")
-            }}>☰</button>
-            <h1 class="logo">✦ newsFlow</h1>
-
-          </div>
-        </div>
-      </header>
 
       <div className={hide}>
         <div className="homeModal">
@@ -316,6 +304,22 @@ export function HomePage({ name }) {
 
       </div>
 
+
+
+
+
+      <header class="site-header">
+        <div class="container">
+          <div class="header-content">
+
+            <button class="menu-btn" aria-label="Menu" onClick={() => {
+              setHIde("homeOverLay")
+            }}>☰</button>
+            <h1 class="logo">✦ newsFlow</h1>
+
+          </div>
+        </div>
+      </header>
       {/* <div className={modaleShow}>
         <div className="modal">
           <section className="remove ">
